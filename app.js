@@ -1,12 +1,21 @@
 import express from "express";
 import router from "./route.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import "dotenv/config";
 
 const app = express();
 
-app.use(cors());
+app.use(
+	cors({
+		origin: ["http://localhost:4200"],
+		allowedHeaders: ["Content-Type", "Authorization"],
+		credentials: true,
+	}),
+);
 app.use("/", router);
 app.use(express.json());
+app.use(cookieParser());
 
 const PORT = 3000;
 app.listen(PORT, () => {

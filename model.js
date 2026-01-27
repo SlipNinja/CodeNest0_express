@@ -18,4 +18,18 @@ class User {
 	}
 }
 
-export default User;
+class Step {
+	static get_steps(id_course, callback) {
+		const sql = `SELECT * FROM steps WHERE id_course = ${id_course}`;
+		db.query(sql, callback);
+	}
+}
+
+class Test {
+	static get_tests(step, callback) {
+		const sql = `SELECT * FROM tests WHERE id_step = ${step["id_step"]}`;
+		db.query(sql, callback);
+	}
+}
+
+export { User, Test, Step };
