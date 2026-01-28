@@ -1,7 +1,7 @@
 import db from "./config_db.js";
 
 class User {
-	static getAll(callback) {
+	static get_all(callback) {
 		const sql = "SELECT * FROM users";
 		db.query(sql, callback);
 	}
@@ -14,6 +14,13 @@ class User {
 	static create_user(username, email, password, callback) {
 		const sql = `INSERT INTO \`users\` (\`username\`, \`email\`, \`experience\`, \`photo\`, \`password\`)
                     VALUES ('${username}', '${email}', 0, 1, '${password}')`;
+		db.query(sql, callback);
+	}
+}
+
+class Course {
+	static get_one(id_course, callback) {
+		const sql = `SELECT * FROM courses WHERE id_course = ${id_course}`;
 		db.query(sql, callback);
 	}
 }
@@ -32,4 +39,4 @@ class Test {
 	}
 }
 
-export { User, Test, Step };
+export { User, Course, Test, Step };

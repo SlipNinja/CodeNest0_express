@@ -1,4 +1,4 @@
-import { User, Test, Step } from "./model.js";
+import { User } from "./model.js";
 import jwt from "jsonwebtoken";
 
 function login(req, res) {
@@ -54,56 +54,4 @@ function auth(req, res, next) {
 	});
 }
 
-function getUsers(req, res) {
-	User.getAll((err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-		res.json(results);
-	});
-}
-
-function create_user(req, res) {
-	const email = req.body.email;
-	const password = req.body.password;
-	const username = req.body.username;
-
-	console.log("Creating user...");
-
-	User.create_user(username, email, password, (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-		res.status(201).json(results);
-	});
-}
-
-function get_steps(req, res) {
-	console.log("REQUEST : " + req.body);
-	const id_course = req.body.id_course;
-	Step.get_steps(id_course, (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-
-		res.json(results);
-	});
-}
-
-function execute_code(req, res) {
-	const code = req.body.code;
-	const step = req.body.step;
-	console.log("EXECUTING...");
-	Test.get_tests(step, (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-
-		// Do execute here
-		console.log(results);
-
-		res.json(results);
-	});
-}
-
-export { auth, getUsers, login, create_user, execute_code, get_steps };
+export { login, auth };
