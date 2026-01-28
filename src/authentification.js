@@ -1,9 +1,11 @@
 import { User } from "./model.js";
 import jwt from "jsonwebtoken";
 
+// Handles login and json web token creation for authentification
 function login(req, res) {
 	const { email, password } = req.body;
 
+	// Query user by credentials
 	User.login(email, password, (err, results) => {
 		if (err) {
 			return res.status(500).json({ error: err });
@@ -11,6 +13,7 @@ function login(req, res) {
 
 		const user = results[0];
 
+		// If user found in database
 		if (user) {
 			// Dont send password in token
 			delete user["password"];
@@ -22,7 +25,7 @@ function login(req, res) {
 			res.cookie("jwt_token", token, { httpOnly: true, secure: true });
 			res.status(200).json({ message: token });
 		} else {
-			res.status(401).json({ message: "Authentification failed." });
+			res.status(401).json({ message: "Email or password incorrect" });
 		}
 	});
 }
@@ -50,6 +53,7 @@ function auth(req, res, next) {
 		if (err && err instanceof jwt.JsonWebTokenError) {
 			return res.status(401).json({ message: "Invalid token : " + err });
 		}
+		console.log("Authentification successful.");
 		next();
 	});
 }
