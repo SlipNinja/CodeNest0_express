@@ -25,8 +25,6 @@ export function create_user(req, res) {
 	const password = req.body.password;
 	const username = req.body.username;
 
-	console.log("Creating user...");
-
 	User.create_user(username, email, password, (err, results) => {
 		if (err) {
 			return res.status(500).json({ error: err });
@@ -36,7 +34,6 @@ export function create_user(req, res) {
 }
 
 export function get_steps(req, res) {
-	console.log("REQUEST : " + req.body);
 	const id_course = req.body.id_course;
 	Step.get_steps(id_course, (err, results) => {
 		if (err) {
@@ -50,7 +47,7 @@ export function get_steps(req, res) {
 export function execute_code(req, res) {
 	const code = req.body.code;
 	const step = req.body.step;
-	console.log("EXECUTING...");
+
 	Test.get_tests(step, (err, results) => {
 		if (err) {
 			return res.status(500).json({ error: err });
