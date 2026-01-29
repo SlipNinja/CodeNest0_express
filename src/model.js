@@ -23,6 +23,18 @@ class Course {
 		const sql = `SELECT * FROM courses WHERE id_course = ${id_course}`;
 		db.query(sql, callback);
 	}
+
+	static get_all(callback) {
+		const sql = "SELECT * FROM courses";
+		db.query(sql, callback);
+	}
+}
+
+class Tag {
+	static get_by_course(id_course, callback) {
+		const sql = `SELECT name FROM tags JOIN course_tag ON tags.id_tag = course_tag.id_tag WHERE id_course = ${id_course}`;
+		db.query(sql, callback);
+	}
 }
 
 class Step {
@@ -39,4 +51,4 @@ class Test {
 	}
 }
 
-export { User, Course, Test, Step };
+export { User, Course, Test, Step, Tag };

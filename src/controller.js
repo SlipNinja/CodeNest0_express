@@ -1,5 +1,6 @@
 import { User, Course, Test, Step } from "./model.js";
 
+// Course
 export function get_course(req, res) {
 	const id_course = req.params.id;
 
@@ -11,6 +12,16 @@ export function get_course(req, res) {
 	});
 }
 
+export function get_courses(req, res) {
+	Course.get_all((err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err });
+		}
+		res.status(200).json(results);
+	});
+}
+
+// User
 export function get_users(req, res) {
 	User.get_all((err, results) => {
 		if (err) {
@@ -33,6 +44,7 @@ export function create_user(req, res) {
 	});
 }
 
+// Steps
 export function get_steps(req, res) {
 	const id_course = req.body.id_course;
 	Step.get_steps(id_course, (err, results) => {
@@ -44,6 +56,7 @@ export function get_steps(req, res) {
 	});
 }
 
+// Execute
 export function execute_code(req, res) {
 	const code = req.body.code;
 	const step = req.body.step;

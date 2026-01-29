@@ -18,3 +18,15 @@ VALUES (10, 'number', 2);
 
 INSERT INTO `tests`(`expected_result`, `result_type`, `id_step`)
 VALUES (False, 'boolean', 3);
+
+INSERT INTO `tags`(`name`)
+VALUES ('javascript');
+
+INSERT INTO `tags`(`name`)
+VALUES ('beginner');
+
+INSERT INTO `course_tag`(`id_course`, `id_tag`)
+VALUES (1, 1);
+
+INSERT INTO `course_tag`(`id_course`, `id_tag`)
+VALUES (1, 2);
