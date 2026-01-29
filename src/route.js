@@ -8,6 +8,7 @@ router.use(express.json());
 // Course
 router.get("/courses", controller.get_courses);
 router.get("/courses/:id", controller.get_course);
+router.get("/courses/:id/tags", controller.get_tags_by_course);
 
 // User
 router.get("/users", controller.get_users);

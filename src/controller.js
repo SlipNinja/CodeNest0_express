@@ -1,4 +1,4 @@
-import { User, Course, Test, Step } from "./model.js";
+import { User, Course, Test, Step, Tag } from "./model.js";
 
 // Course
 export function get_course(req, res) {
@@ -14,6 +14,18 @@ export function get_course(req, res) {
 
 export function get_courses(req, res) {
 	Course.get_all((err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err });
+		}
+		res.status(200).json(results);
+	});
+}
+
+// Tag
+export function get_tags_by_course(req, res) {
+	const id_course = req.params.id;
+
+	Tag.get_by_course(id_course, (err, results) => {
 		if (err) {
 			return res.status(500).json({ error: err });
 		}
