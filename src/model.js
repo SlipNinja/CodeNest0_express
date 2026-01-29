@@ -33,6 +33,11 @@ class Course {
 		const sql = `SELECT * FROM dependency_course WHERE id_course = ${id_course}`;
 		db.query(sql, callback);
 	}
+
+	static get_course_taken(id_course, id_user, callback) {
+		const sql = `SELECT * FROM course_taken WHERE id_course = ${id_course} AND id_user = ${id_user}`;
+		db.query(sql, callback);
+	}
 }
 
 class Tag {

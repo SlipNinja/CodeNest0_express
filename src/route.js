@@ -10,6 +10,7 @@ router.get("/courses", controller.get_courses);
 router.get("/courses/:id", controller.get_course);
 router.get("/courses/:id/tags", controller.get_tags_by_course);
 router.get("/courses/:id/dependencies", controller.get_dependencies);
+router.get("/courses/taken", controller.get_course_taken);
 
 // User
 router.get("/users", controller.get_users);
@@ -22,6 +23,6 @@ router.post("/login", login);
 router.post("/create", controller.create_user);
 
 // Execute
-router.post("/execute", auth, controller.execute_code);
+router.post("/execute", controller.execute_code);
 
 export default router;
