@@ -6,14 +6,14 @@ export default class User {
 		db.query(sql, callback);
 	}
 
-	static login(email, password, callback) {
-		const sql = `SELECT * FROM users WHERE email = "${email}" AND password = "${password}"`;
+	static login(email, callback) {
+		const sql = `SELECT * FROM users WHERE email = "${email}"`;
 		db.query(sql, callback);
 	}
 
 	static create_user(username, email, password, callback) {
 		const sql = `INSERT INTO \`users\` (\`username\`, \`email\`, \`experience\`, \`photo\`, \`password\`)
-                    VALUES ('${username}', '${email}', 0, 1, '${password}')`;
+                    VALUES ('${username}', '${email}', 0, 'empty_profile.png', '${password}')`;
 		db.query(sql, callback);
 	}
 }
