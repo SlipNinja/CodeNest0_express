@@ -1,4 +1,4 @@
-import { User } from "./model.js";
+import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
 // Handles login and json web token creation for authentification

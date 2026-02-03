@@ -1,28 +1,36 @@
 import express from "express";
-import * as controller from "./controller.js";
-import { login, auth } from "./authentification.js";
+
+import * as user_ctrl from "./controllers/User_controller.js";
+import * as course_ctrl from "./controllers/Course_controller.js";
+import * as step_ctrl from "./controllers/Step_controller.js";
+import * as tag_ctrl from "./controllers/Tag_controller.js";
+
+import { login, auth } from "./controllers/authentification.js";
+import { execute_code } from "./controllers/execution.js";
 
 const router = express.Router();
 router.use(express.json());
 
 // Course
-router.get("/courses", controller.get_courses);
-router.get("/courses/:id", controller.get_course);
-router.get("/courses/:id/tags", controller.get_tags_by_course);
-router.get("/courses/:id/dependencies", controller.get_dependencies);
-router.get("/courses_taken", controller.get_course_taken);
+router.get("/courses", course_ctrl.get_courses);
+router.get("/courses/:id", course_ctrl.get_course);
+router.get("/courses/:id/dependencies", course_ctrl.get_dependencies);
+router.get("/courses_taken", course_ctrl.get_course_taken);
+
+// Tag
+router.get("/courses/:id/tags", tag_ctrl.get_tags_by_course);
 
 // User
-router.get("/users", controller.get_users);
+router.get("/users", user_ctrl.get_users);
+router.post("/create", user_ctrl.create_user);
 
 // Step
-router.get("/steps", controller.get_steps);
+router.get("/steps", step_ctrl.get_steps);
 
 // Authentification
 router.post("/login", login);
-router.post("/create", controller.create_user);
 
 // Execute
-router.post("/execute", controller.execute_code);
+router.post("/execute", execute_code);
 
 export default router;
