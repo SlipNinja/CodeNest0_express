@@ -5,8 +5,8 @@ import * as course_ctrl from "./controllers/Course_controller.js";
 import * as step_ctrl from "./controllers/Step_controller.js";
 import * as tag_ctrl from "./controllers/Tag_controller.js";
 
-import { login, auth } from "./controllers/authentification.js";
-import { execute_code } from "./controllers/execution.js";
+import { auth } from "./services/authentification.js";
+import { execute_code } from "./services/execution.js";
 
 const router = express.Router();
 router.use(express.json());
@@ -28,7 +28,7 @@ router.post("/create", user_ctrl.create_user);
 router.get("/steps", step_ctrl.get_steps);
 
 // Authentification
-router.post("/login", login);
+router.post("/login", user_ctrl.login);
 
 // Execute
 router.post("/execute", execute_code);
