@@ -16,4 +16,9 @@ export default class User {
                     VALUES ('${username}', '${email}', 0, 'empty_profile.png', '${password}')`;
 		db.query(sql, callback);
 	}
+
+	static delete_user(id_user, callback) {
+		const sql = `DELETE FROM users WHERE id_user = "${id_user}"`;
+		db.query(sql, callback);
+	}
 }

@@ -11,6 +11,15 @@ export function get_users(req, res) {
 	});
 }
 
+export function delete_user(req, res) {
+	User.delete_user(req.params.id, (err, results) => {
+		if (err) {
+			return res.status(500).json({ error: err });
+		}
+		res.status(204).json(results);
+	});
+}
+
 export async function create_user(req, res) {
 	const { email, password, username } = req.body;
 

@@ -22,6 +22,7 @@ router.get("/courses/:id/tags", tag_ctrl.get_tags_by_course);
 
 // User
 router.get("/users", user_ctrl.get_users);
+router.delete("/users/:id", auth, user_ctrl.delete_user);
 router.post("/create", user_ctrl.create_user);
 
 // Step
