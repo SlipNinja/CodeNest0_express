@@ -17,7 +17,7 @@ export default class Course {
 	}
 
 	static async get_course_taken(id_course, id_user) {
-		const sql = `SELECT * FROM course_taken WHERE id_course = ${id_course} AND id_user = ${id_user}`;
+		const sql = `SELECT * FROM course_taken WHERE id_course = "${id_course}" AND id_user = "${id_user}"`;
 		return await db.execute(sql);
 	}
 }
