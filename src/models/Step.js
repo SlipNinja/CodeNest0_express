@@ -1,8 +1,8 @@
 import db from "../config/database.js";
 
 export default class Step {
-	static get_steps(id_course, callback) {
+	static async get_steps(id_course) {
 		const sql = `SELECT * FROM steps WHERE id_course = ${id_course}`;
-		db.query(sql, callback);
+		return await db.execute(sql);
 	}
 }

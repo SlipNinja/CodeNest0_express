@@ -1,24 +1,24 @@
 import db from "../config/database.js";
 
 export default class User {
-	static get_all(callback) {
+	static async get_all() {
 		const sql = "SELECT * FROM users";
-		db.query(sql, callback);
+		return await db.execute(sql);
 	}
 
-	static login(email, callback) {
+	static async login(email) {
 		const sql = `SELECT * FROM users WHERE email = "${email}"`;
-		db.query(sql, callback);
+		return await db.execute(sql);
 	}
 
-	static create_user(username, email, password, callback) {
+	static async create_user(username, email, password) {
 		const sql = `INSERT INTO \`users\` (\`username\`, \`email\`, \`experience\`, \`photo\`, \`password\`)
                     VALUES ('${username}', '${email}', 0, 'empty_profile.png', '${password}')`;
-		db.query(sql, callback);
+		return await db.execute(sql);
 	}
 
-	static delete_user(id_user, callback) {
+	static async delete_user(id_user) {
 		const sql = `DELETE FROM users WHERE id_user = "${id_user}"`;
-		db.query(sql, callback);
+		return await db.execute(sql);
 	}
 }

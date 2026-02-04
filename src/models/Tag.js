@@ -1,8 +1,8 @@
 import db from "../config/database.js";
 
 export default class Tag {
-	static get_by_course(id_course, callback) {
+	static async get_by_course(id_course) {
 		const sql = `SELECT name FROM tags JOIN course_tag ON tags.id_tag = course_tag.id_tag WHERE id_course = ${id_course}`;
-		db.query(sql, callback);
+		return await db.execute(sql);
 	}
 }

@@ -9,7 +9,6 @@ import { auth } from "../services/authentification.js";
 import { execute_code } from "../services/execution.js";
 
 const router = express.Router();
-router.use(express.json());
 
 // Course
 router.get("/courses", course_ctrl.get_courses);

@@ -2,22 +2,14 @@ import User from "../models/User.js";
 import { create_token } from "../services/authentification.js";
 import bcrypt from "bcrypt";
 
-export function get_users(req, res) {
-	User.get_all((err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-		res.json(results);
-	});
+export async function get_users(req, res) {
+	const results = await User.get_all();
+	res.status(200).json(results[0]);
 }
 
-export function delete_user(req, res) {
-	User.delete_user(req.params.id, (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-		res.status(204).json(results);
-	});
+export async function delete_user(req, res) {
+	const results = await User.delete_user(req.params.id);
+	res.status(204).json(results);
 }
 
 export async function create_user(req, res) {
@@ -27,32 +19,22 @@ export async function create_user(req, res) {
 	const rounds = parseInt(process.env.BCRYPT_ROUNDS);
 	const password_hash = await bcrypt.hash(password, rounds);
 
-	User.create_user(username, email, password_hash, (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
-		res.status(201).json(results);
-	});
+	const results = await User.create_user(username, email, password_hash);
+	res.status(201).json(results);
 }
 
-export function login(req, res) {
+export async function login(req, res) {
 	const { email, password } = req.body;
 
 	// Query user by credentials
-	User.login(email, (err, results) => {
-		if (err) {
-			return res.status(500).json({ error: err });
-		}
+	const results = await User.login(email);
+	const user = results[0][0];
+	if (!user) return res.status(404).json({ message: "User not found." });
 
-		const user = results[0];
-		if (!user) return res.status(404).json({ message: "User not found." });
+	const password_hash = user["password"];
+	const valid = bcrypt.compare(password, password_hash);
+	if (!valid) return res.status(401).json({ message: "Wrong credentials." });
 
-		const password_hash = user["password"];
-		const valid = bcrypt.compare(password, password_hash);
-
-		if (!valid) return res.status(401).json({ message: "Wrong credentials." });
-
-		const token = create_token(user);
-		res.status(200).json({ message: token });
-	});
+	const token = create_token(user);
+	res.status(200).json({ message: token });
 }

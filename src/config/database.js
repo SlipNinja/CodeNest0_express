@@ -1,7 +1,7 @@
 import mysql from "mysql2";
 
 const MySQL_PORT = 3306;
-const db = mysql.createConnection({
+const pool = mysql.createPool({
 	host: "localhost",
 	user: "root",
 	password: "",
@@ -9,12 +9,4 @@ const db = mysql.createConnection({
 	port: MySQL_PORT,
 });
 
-db.connect((err) => {
-	if (err) {
-		console.error("Connexion error : " + err);
-	} else {
-		console.log("Connexion successfull with MySQL at port " + MySQL_PORT);
-	}
-});
-
-export default db;
+export default pool.promise();
