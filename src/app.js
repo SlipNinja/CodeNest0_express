@@ -14,8 +14,8 @@ app.use(
 	}),
 );
 
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 app.use("/", router);
 
 const PORT = 3000;

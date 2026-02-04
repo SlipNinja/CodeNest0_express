@@ -9,7 +9,15 @@ export async function get_users(req, res) {
 
 export async function delete_user(req, res) {
 	const results = await User.delete_user(req.params.id);
-	res.status(204).json(results);
+	res.status(204).json(results[0]);
+}
+
+export async function update_user(req, res) {
+	const { email, username } = req.body;
+	await User.update_user(req.params.id, username, email);
+	const results = await User.get_one(req.params.id);
+	const token = create_token(results[0][0]);
+	res.status(201).json(token);
 }
 
 export async function create_user(req, res) {
@@ -20,7 +28,7 @@ export async function create_user(req, res) {
 	const password_hash = await bcrypt.hash(password, rounds);
 
 	const results = await User.create_user(username, email, password_hash);
-	res.status(201).json(results);
+	res.status(201).json(results[0]);
 }
 
 export async function login(req, res) {

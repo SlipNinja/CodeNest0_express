@@ -6,6 +6,11 @@ export default class User {
 		return await db.execute(sql);
 	}
 
+	static async get_one(id_user) {
+		const sql = `SELECT * FROM users WHERE id_user = ${id_user}`;
+		return await db.execute(sql);
+	}
+
 	static async login(email) {
 		const sql = `SELECT * FROM users WHERE email = "${email}"`;
 		return await db.execute(sql);
@@ -19,6 +24,21 @@ export default class User {
 
 	static async delete_user(id_user) {
 		const sql = `DELETE FROM users WHERE id_user = "${id_user}"`;
+		return await db.execute(sql);
+	}
+
+	static async update_user(id_user, username, email) {
+		let fields;
+
+		if (username && email) {
+			fields = `username = '${username}', email = '${email}' `;
+		} else if (username) {
+			fields = `username = '${username}'`;
+		} else {
+			fields = `email = '${email}'`;
+		}
+
+		const sql = `UPDATE users SET ${fields} WHERE id_user = "${id_user}"`;
 		return await db.execute(sql);
 	}
 }
