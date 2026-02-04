@@ -1,12 +1,12 @@
 import express from "express";
 
-import * as user_ctrl from "./controllers/User_controller.js";
-import * as course_ctrl from "./controllers/Course_controller.js";
-import * as step_ctrl from "./controllers/Step_controller.js";
-import * as tag_ctrl from "./controllers/Tag_controller.js";
+import * as user_ctrl from "../controllers/User_controller.js";
+import * as course_ctrl from "../controllers/Course_controller.js";
+import * as step_ctrl from "../controllers/Step_controller.js";
+import * as tag_ctrl from "../controllers/Tag_controller.js";
 
-import { auth } from "./services/authentification.js";
-import { execute_code } from "./services/execution.js";
+import { auth } from "../services/authentification.js";
+import { execute_code } from "../services/execution.js";
 
 const router = express.Router();
 router.use(express.json());
