@@ -1,4 +1,4 @@
-import db from "../config_db.js";
+import db from "../config/database.js";
 
 export default class Test {
 	static get_tests(step, callback) {

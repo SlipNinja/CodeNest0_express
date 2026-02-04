@@ -1,4 +1,4 @@
-import db from "../config_db.js";
+import db from "../config/database.js";
 
 export default class Tag {
 	static get_by_course(id_course, callback) {
