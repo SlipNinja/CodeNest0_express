@@ -8,6 +8,9 @@ import * as tag_ctrl from "../controllers/Tag_controller.js";
 import { auth } from "../services/authentification.js";
 import { execute_code } from "../services/execution.js";
 
+import { user_schema } from "../../validators/User_validator.js";
+import { validate_user } from "../../middlewares/validate.js";
+
 const router = express.Router();
 
 // Course
@@ -24,7 +27,7 @@ router.get("/courses/:id/tags", tag_ctrl.get_tags_by_course);
 router.get("/users", user_ctrl.get_users);
 router.delete("/users/:id", auth, user_ctrl.delete_user);
 router.put("/users/:id/update", auth, user_ctrl.update_user);
-router.post("/create", user_ctrl.create_user);
+router.post("/create", validate_user(user_schema), user_ctrl.create_user);
 
 // Step
 router.get("/steps", step_ctrl.get_steps);
