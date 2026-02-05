@@ -20,4 +20,9 @@ export default class Course {
 		const sql = `SELECT * FROM course_taken WHERE id_course = "${id_course}" AND id_user = "${id_user}"`;
 		return await db.execute(sql);
 	}
+
+	static async get_course_steps(id_course) {
+		const sql = `SELECT * FROM steps WHERE id_course = "${id_course}"`;
+		return await db.execute(sql);
+	}
 }

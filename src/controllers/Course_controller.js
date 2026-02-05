@@ -23,3 +23,9 @@ export async function get_dependencies(req, res) {
 	const results = await Course.get_dependencies(id_course);
 	res.status(200).json(results[0]);
 }
+
+export async function get_steps(req, res) {
+	const id_course = req.params.id;
+	const results = await Course.get_course_steps(id_course);
+	res.status(200).json(results[0]);
+}

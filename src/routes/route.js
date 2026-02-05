@@ -14,6 +14,7 @@ const router = express.Router();
 router.get("/courses", course_ctrl.get_courses);
 router.get("/courses/:id", course_ctrl.get_course);
 router.get("/courses/:id/dependencies", course_ctrl.get_dependencies);
+router.get("/courses/:id/steps", auth, course_ctrl.get_steps);
 router.get("/courses_taken", course_ctrl.get_course_taken);
 
 // Tag
