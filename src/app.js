@@ -1,5 +1,11 @@
 import express from "express";
-import router from "./routes/route.js";
+
+import course_router from "./routes/Course_routes.js";
+import user_router from "./routes/User_routes.js";
+import tag_router from "./routes/Tag_routes.js";
+import step_router from "./routes/Step_routes.js";
+import exec_router from "./routes/Execution_routes.js";
+
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import "dotenv/config";
@@ -16,7 +22,11 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
-app.use("/", router);
+app.use("/courses", course_router);
+app.use("/users", user_router);
+app.use("/steps", step_router);
+app.use("/tags", tag_router);
+app.use("/execute", exec_router);
 
 const PORT = 3000;
 app.listen(PORT, () => {
