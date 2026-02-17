@@ -1,12 +1,11 @@
 import mysql from "mysql2";
 
-const MySQL_PORT = 3306;
 const pool = mysql.createPool({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "codenest0",
-	port: MySQL_PORT,
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASSWORD,
+	database: process.env.DB_NAME,
+	port: process.env.DB_MYSQL_PORT,
 });
 
 export default pool.promise();
