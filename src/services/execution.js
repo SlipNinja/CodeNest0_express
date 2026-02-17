@@ -1,49 +1,20 @@
-import Test from "../models/Test.js";
 import FileManager from "./FileManager.js";
 import child_process from "child_process";
 
-//import child_process
-
-// interface TestResponse {
-// 	test: string;
-// 	logs: string[];
-// 	passed: boolean;
-// }
-
-// export interface ExecutionResponse {
-// 	test_responses?: TestResponse[];
-// 	all_passed: boolean;
-// }
-
-export async function execute_code(req, res) {
-	const { step, lang, code } = req.body;
-
-	//console.log("STEP " + Object.entries(step));
-	//console.log("LANG " + lang);
-	//console.log("CODE " + code);
-
-	const results = await Test.get_tests(step["id_step"]);
-	const tests = results[0];
-	const is_func = step["element_is_function"];
-
-	if (is_func) {
-		// Get params etc
-	} else {
-		// Only one test for variables
-		const result = await execute_variable_test(code, tests[0]);
-		console.log(result);
-	}
-
-	res.json(results);
-}
-
-function execute_variable_test(code, test) {
+export function execute_variable_test(code, test, element_name) {
 	const path = `./src/tmp/${test["id_test"]}.js`;
+	const formatted_code = `try {
+    ${code.trim()}
+	process.send({name:${element_name}, type: typeof ${element_name}});
+} catch (e) {
+	const error = e.name + " : " + e.message;
+	console.error(error);
+}`;
 
-	//FileManager.write(path, code);
+	FileManager.write(path, formatted_code);
 
 	const test_result = {
-		test: `Expected ${test["expected_result"]}`,
+		test: "",
 		logs: [],
 		passed: false,
 	};
@@ -60,27 +31,23 @@ function execute_variable_test(code, test) {
 	});
 
 	p.on("message", (msg) => {
-		// if (test["result_type"] == number) {
-		// 	msg = parseInt(msg);
-		// }
+		const value = msg["name"] == test["expected_result"];
+		const type = msg["type"] == test["result_type"];
 
-		test_result["passed"] = msg == test["expected_result"];
+		if (!type) {
+			test_result["test"] = `Expected ${test["result_type"]} - Received ${msg["type"]}`;
+		} else {
+			test_result["test"] = `Expected ${test["expected_result"]} - Received ${msg["name"]}`;
+		}
+		test_result["passed"] = value && type;
 	});
 
 	const promise = new Promise((resolve, reject) => {
 		p.on("exit", (code, signal) => {
 			resolve(test_result);
+			FileManager.delete(path);
 		});
 	});
 
 	return promise;
-
-	//FileManager.delete(path);
-
-	// Format code
-	// Create tmp file ( with id ? ) to write code to
-	// Fork
-	// Wait for results
-	// Remove tmp file
-	// Return results
 }
