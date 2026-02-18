@@ -29,3 +29,9 @@ export async function get_steps(req, res) {
 	const results = await Course.get_course_steps(id_course);
 	res.status(200).json(results[0]);
 }
+
+export async function update_course_taken(req, res) {
+	const { id_course, id_user, last_finished_step } = req.body;
+	const results = await Course.update_course_taken(id_course, id_user, last_finished_step);
+	res.status(200).json(results[0]);
+}
