@@ -7,7 +7,14 @@ export default class Course {
 	}
 
 	static async get_all() {
-		const sql = "SELECT * FROM courses";
+		const sql = `SELECT * FROM courses`;
+		return await db.execute(sql);
+	}
+
+	static async get_all_for_user(id_user) {
+		const sql = `SELECT courses.id_course, name, logo, level, description, programming_language, number_step, (number_step = (last_finished_step + 1)) AS completed FROM courses
+                    JOIN course_taken ON courses.id_course = course_taken.id_course
+                    WHERE id_user = "${id_user}"`;
 		return await db.execute(sql);
 	}
 

@@ -11,6 +11,12 @@ export async function get_courses(req, res) {
 	res.status(200).json(results[0]);
 }
 
+export async function get_courses_for_user(req, res) {
+	const id_user = req.params.id;
+	const results = await Course.get_all_for_user(id_user);
+	res.status(200).json(results[0]);
+}
+
 export async function get_course_taken(req, res) {
 	const id_course = req.query.id_course;
 	const id_user = req.query.id_user;
