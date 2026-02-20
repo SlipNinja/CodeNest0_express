@@ -10,6 +10,7 @@ const user_router = express.Router();
 user_router.get("/", auth, user_ctrl.get_users);
 user_router.get("/:id/xp", auth, user_ctrl.get_total_xp);
 user_router.delete("/:id", auth, user_ctrl.delete_user);
+user_router.put("/:id_user/last_course/:id_course", auth, user_ctrl.update_last_course);
 user_router.put("/:id", auth, user_ctrl.update_user);
 user_router.post("/", validate_user(user_schema), user_ctrl.create_user);
 user_router.post("/login", user_ctrl.login);

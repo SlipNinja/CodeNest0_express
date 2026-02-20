@@ -42,6 +42,11 @@ export default class User {
 		return await db.execute(sql);
 	}
 
+	static async update_last_course(id_user, id_course) {
+		const sql = `UPDATE users SET id_last_course = "${id_course}" WHERE id_user = "${id_user}"`;
+		return await db.execute(sql);
+	}
+
 	static async total_xp(id_user) {
 		const sql = `SELECT (SUM(last_finished_step) * 10) AS total_xp FROM users
 JOIN course_taken ON users.id_user = course_taken.id_user

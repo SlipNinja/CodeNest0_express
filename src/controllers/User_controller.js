@@ -26,6 +26,15 @@ export async function update_user(req, res) {
 	res.status(201).json(token);
 }
 
+export async function update_last_course(req, res) {
+	const id_user = req.params.id_user;
+	const id_course = req.params.id_course;
+	const result = await User.update_last_course(id_user, id_course);
+	const results = await User.get_one(id_user);
+	const token = create_token(results[0][0]);
+	res.status(201).json(token);
+}
+
 export async function create_user(req, res) {
 	const { email, password, username } = req.body;
 
