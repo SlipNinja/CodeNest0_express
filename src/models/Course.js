@@ -18,6 +18,13 @@ export default class Course {
 		return await db.execute(sql);
 	}
 
+	static async get_all_count_for_user(id_user) {
+		const sql = `SELECT COUNT(*) AS count FROM courses
+                    JOIN course_taken ON courses.id_course = course_taken.id_course
+                    WHERE id_user = "${id_user}" AND number_step = last_finished_step`;
+		return await db.execute(sql);
+	}
+
 	static async get_dependencies(id_course) {
 		const sql = `SELECT * FROM dependency_course WHERE id_course = ${id_course}`;
 		return await db.execute(sql);
@@ -25,6 +32,12 @@ export default class Course {
 
 	static async get_course_taken(id_course, id_user) {
 		const sql = `SELECT * FROM course_taken WHERE id_course = "${id_course}" AND id_user = "${id_user}"`;
+		return await db.execute(sql);
+	}
+
+	static async add_course_taken(id_course, id_user) {
+		const sql = `INSERT INTO course_taken(id_user, id_course, last_finished_step) 
+        VALUES ("${id_user}", "${id_course}", "0")`;
 		return await db.execute(sql);
 	}
 

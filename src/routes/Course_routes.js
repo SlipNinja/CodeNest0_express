@@ -4,9 +4,9 @@ import { auth } from "../services/authentification.js";
 
 const course_router = express.Router();
 
-// Course
 course_router.get("/", course_ctrl.get_courses);
 course_router.get("/user/:id", auth, course_ctrl.get_courses_for_user);
+course_router.get("/user/:id/count", auth, course_ctrl.get_courses_count_for_user);
 course_router.get("/taken", auth, course_ctrl.get_course_taken);
 course_router.put("/taken", auth, course_ctrl.update_course_taken);
 course_router.get("/:id", course_ctrl.get_course);

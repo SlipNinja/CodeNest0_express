@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import { create_token } from "../services/authentification.js";
 import bcrypt from "bcrypt";
+import Course from "../models/Course.js";
 
 export async function get_users(req, res) {
 	const results = await User.get_all();
@@ -43,6 +44,14 @@ export async function create_user(req, res) {
 	const password_hash = await bcrypt.hash(password, rounds);
 
 	const results = await User.create_user(username, email, password_hash);
+
+	const courses_data = await Course.get_all();
+	const courses = courses_data[0];
+
+	for (const course of courses) {
+		await Course.add_course_taken(course["id_course"], results[0]["insertId"]);
+	}
+
 	res.status(201).json(results[0]);
 }
 
