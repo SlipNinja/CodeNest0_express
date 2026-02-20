@@ -12,6 +12,12 @@ export async function delete_user(req, res) {
 	res.status(204).json(results[0]);
 }
 
+export async function get_total_xp(req, res) {
+	const id_user = req.params.id;
+	const results = await User.total_xp(id_user);
+	res.status(200).json(results[0][0]);
+}
+
 export async function update_user(req, res) {
 	const { email, username } = req.body;
 	await User.update_user(req.params.id, username, email);
