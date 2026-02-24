@@ -1,10 +1,10 @@
 import express from "express";
 
-import course_router from "./routes/Course_routes.js";
-import user_router from "./routes/User_routes.js";
-import tag_router from "./routes/Tag_routes.js";
-import step_router from "./routes/Step_routes.js";
-import exec_router from "./routes/Execution_routes.js";
+import course_router from "./routes/course.route.js";
+import user_router from "./routes/user.route.js";
+import tag_router from "./routes/tag.route.js";
+import step_router from "./routes/step.route.js";
+import exec_router from "./routes/execution.route.js";
 
 import cors from "cors";
 import cookieParser from "cookie-parser";

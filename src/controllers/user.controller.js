@@ -1,7 +1,7 @@
-import User from "../models/User.js";
+import User from "../models/user.model.js";
 import { create_token } from "../services/authentification.js";
 import bcrypt from "bcrypt";
-import Course from "../models/Course.js";
+import Course from "../models/course.model.js";
 
 export async function get_users(req, res) {
 	const results = await User.get_all();

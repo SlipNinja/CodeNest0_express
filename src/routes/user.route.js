@@ -1,8 +1,8 @@
 import express from "express";
 
-import * as user_ctrl from "../controllers/User_controller.js";
+import * as user_ctrl from "../controllers/user.controller.js";
 import { auth } from "../services/authentification.js";
-import { user_schema } from "../../validators/User_validator.js";
+import { user_schema } from "../../validators/user.validator.js";
 import { validate_user } from "../../middlewares/validate.js";
 
 const user_router = express.Router();

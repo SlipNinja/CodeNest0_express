@@ -1,4 +1,4 @@
-import Course from "../models/Course.js";
+import Course from "../models/course.model.js";
 
 export async function get_course(req, res) {
 	const id_course = req.params.id;

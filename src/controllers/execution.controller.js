@@ -1,4 +1,4 @@
-import Test from "../models/Test.js";
+import Test from "../models/test.model.js";
 import { execute_tests } from "../services/execution.js";
 
 export async function execute_code(req, res) {

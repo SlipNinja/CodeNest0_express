@@ -1,6 +1,6 @@
 import FileManager from "./FileManager.js";
 import child_process from "child_process";
-import Param from "../models/Param.js";
+import Param from "../models/param.model.js";
 
 // Executes all tests
 export async function execute_tests(code, tests, is_function, element_name) {

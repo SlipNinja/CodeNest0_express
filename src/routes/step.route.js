@@ -1,5 +1,5 @@
 import express from "express";
-import * as step_ctrl from "../controllers/Step_controller.js";
+import * as step_ctrl from "../controllers/step.controller.js";
 import { auth } from "../services/authentification.js";
 
 const step_router = express.Router();

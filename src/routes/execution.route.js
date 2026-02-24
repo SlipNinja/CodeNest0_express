@@ -1,5 +1,5 @@
 import express from "express";
-import { execute_code } from "../controllers/Execution_controller.js";
+import { execute_code } from "../controllers/execution.controller.js";
 import { auth } from "../services/authentification.js";
 
 const exec_router = express.Router();

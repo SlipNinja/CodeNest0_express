@@ -1,5 +1,5 @@
 import express from "express";
-import * as course_ctrl from "../controllers/Course_controller.js";
+import * as course_ctrl from "../controllers/course.controller.js";
 import { auth } from "../services/authentification.js";
 
 const course_router = express.Router();

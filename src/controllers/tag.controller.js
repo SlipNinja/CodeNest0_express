@@ -1,4 +1,4 @@
-import Tag from "../models/Tag.js";
+import Tag from "../models/tag.model.js";
 
 export async function get_tags_by_course(req, res) {
 	const id_course = req.params.id;
