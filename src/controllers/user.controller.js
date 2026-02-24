@@ -64,7 +64,7 @@ export async function login(req, res) {
 	if (!user) return res.status(404).json({ message: "User not found." });
 
 	const password_hash = user["password"];
-	const valid = bcrypt.compare(password, password_hash);
+	const valid = await bcrypt.compare(password, password_hash);
 	if (!valid) return res.status(401).json({ message: "Wrong credentials." });
 
 	const token = create_token(user);
