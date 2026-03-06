@@ -5,14 +5,42 @@
 This project is used as a backend counterpart for the project CodeNest0.
 It uses the express framework ( NodeJS ) and serves as a REST API. 💪
 
-## Coding convention
+## Technologies and dependencies
 
-➡️ 4-spaces for identation
+- Angular framework
+- lucide-angular
+- ngx-cookie-service
+- codemirror
+- bootstrap-icons
 
-➡️ variables and functions in english
+## Installation
 
-➡️ classes in camelCase, other things in snake_case
+To install dependencies:
 
-## Commit convention
+```bash
+npm install
+```
 
-Angular commit conventions ( feat, fix, refactor... )
+## Development server
+
+To start a local development server, run:
+
+```bash
+node src/app.js
+```
+
+## Folder structure
+
+<pre>
+CodeNest0/  
+└─ src/    
+    ├─ app/
+    │   ├─ components
+    │   ├─ interfaces
+    │   └─ services
+    ├─ style_modules/
+    │    └─ fonts/
+    ├─ index.html
+    ├─ main.ts
+    └─ styles.css
+</pre>

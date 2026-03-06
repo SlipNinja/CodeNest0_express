@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-import { create_token } from "../services/authentification.js";
+import { create_token } from "../middlewares/authentification.js";
 import bcrypt from "bcrypt";
 import Course from "../models/course.model.js";
 
